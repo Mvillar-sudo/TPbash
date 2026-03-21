@@ -7,7 +7,8 @@ until [[ "$salir" == "1" ]]; do
     echo "-----MENU-----"
     echo "1 - Crear entorno"
     echo "2 - Correr proceso"
-    echo "3 - Salir"
+    echo "3 - ordenar listado"
+    echo "4 - Salir"
 
     echo "Ingrese la opción del menú: "
     read opcion
@@ -24,6 +25,13 @@ until [[ "$salir" == "1" ]]; do
 	    PID=$!
 	    echo "$PID";;
         3)
+	    if [[ -f "$HOME/EPNro1/salida/$FILENAME.txt" ]]; then
+	        echo "listado de alumnos ordenados por numero de padron"
+	        sort -n "$HOME/EPNro1/salida/$FILENAME.txt"
+            else
+               echo "el archivo no exsite en la carpeta salida"
+            fi;;
+	4)
             echo "Saliendo..."
 	    pkill -f consolidar.sh
 	    salir="1";;
