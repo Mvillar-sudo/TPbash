@@ -7,8 +7,9 @@ until [[ "$salir" == "1" ]]; do
     echo "-----MENU-----"
     echo "1 - Crear entorno"
     echo "2 - Correr proceso"
-    echo "3 - Ordenar listado"
-    echo "4 - Salir"
+    echo "3 - ordenar listado"
+    echo "4 - lista de las 10 mejores notas"
+    echo "5 - Salir"
 
     echo "Ingrese la opción del menú: "
     read opcion
@@ -31,7 +32,14 @@ until [[ "$salir" == "1" ]]; do
             else
                echo "El archivo no existe en la carpeta salida"
             fi;;
-	4)
+        4)
+	    if [[ -f "$HOME/EPNro1/salida/$FILENAME.txt" ]]; then
+                echo "Lista de los alumnos con las 10 mejores notas"
+                sort -k3,3 -n -r "$HOME/EPNro1/salida/$FILENAME.txt" | head -10
+            else 
+               echo "El archivo no existe en la carpeta salida"
+            fi;;
+	5)
             echo "Saliendo..."
 	    pkill -f consolidar.sh
 	    salir="1";;
