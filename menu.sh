@@ -1,16 +1,16 @@
 #!/bin/bash
-salir="0" 
+salir="0"
 
 FILENAME=$1
 export FILENAME
 
-parametro=$1 
+parametro=$1
 
-if [[ "$parametro" == "-d" ]]; then 
-  echo "Deteniendo el proceso en background y borrando EPNro1..." 
-  pkill -f consolidar.sh 
-  rm -r $HOME/EPNro1 
-else    
+if [[ "$parametro" == "-d" ]]; then
+  echo "Deteniendo el proceso en background y borrando EPNro1..."
+  pkill -f consolidar.sh
+  rm -r $HOME/EPNro1
+else
   until [[ "$salir" == "1" ]]; do
     echo "-----MENU-----"
     echo "1 - Crear entorno"
@@ -45,31 +45,31 @@ else
 	    if [[ -f "$HOME/EPNro1/salida/$FILENAME.txt" ]]; then
                 echo "Lista de los alumnos con las 10 mejores notas"
                 sort -t ' ' -k 5 -n -r "$HOME/EPNro1/salida/$FILENAME.txt" | head -10
-            else 
+            else
                echo "El archivo no existe en la carpeta salida"
             fi;;
 	5)
 	  if [[ -f "$HOME/EPNro1/salida/$FILENAME.txt" ]]; then
 	    echo "Ingrese nro. de padron ('*' para regresar al menu): "
 	    read nro
-	    until [[ "$nro" == "*" ]]; do 
-	      chequeo=$(grep $nro $HOME/EPNro1/salida/$FILENAME.txt | wc -l) 
-	      if [[ $chequeo -eq 0 ]]; then 
+	    until [[ "$nro" == "*" ]]; do
+	      chequeo=$(grep $nro $HOME/EPNro1/salida/$FILENAME.txt | wc -l)
+	      if [[ $chequeo -eq 0 ]]; then
 	        echo "No se encontro" 
-	      else 
-	        grep $nro $HOME/EPNro1/salida/$FILENAME.txt 
-	      fi 
-	      echo "ingrese nro ('*' para regresar al menu): " 
+	      else
+	        grep $nro $HOME/EPNro1/salida/$FILENAME.txt
+	      fi
+	      echo "ingrese nro ('*' para regresar al menu): "
 	      read nro
 	    done
 
 	    echo "Regresando..."
-	  else 
-	    echo "El archivo no existe en la carpeta salida" 
+	  else
+	    echo "El archivo no existe en la carpeta salida"
 	  fi;;
-	6) 
-	    echo "saliendo..." 
-	    salir="1";; 
+	6)
+	    echo "saliendo..."
+	    salir="1";;
 	7)
             echo "Saliendo..."
 	    pkill -f consolidar.sh
