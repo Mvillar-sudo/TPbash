@@ -59,7 +59,7 @@ else
 	      else
 	        grep $nro $HOME/EPNro1/salida/$FILENAME.txt
 	      fi
-	      echo "ingrese nro ('*' para regresar al menu): "
+	      echo "Ingrese número de padrón deseado (o '*' para regresar al menu): "
 	      read nro
 	    done
 
@@ -68,7 +68,7 @@ else
 	    echo "El archivo no existe en la carpeta salida"
 	  fi;;
 	6)
-	    echo "saliendo..."
+	    echo "Saliendo..."
 	    salir="1";;
 	7)
             echo "Saliendo..."
