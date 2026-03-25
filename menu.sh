@@ -30,9 +30,7 @@ else
 	    cp consolidar.sh $HOME/EPNro1/;;
         2)
             echo "Corriendo proceso en background"
-	    bash $HOME/EPNro1/consolidar.sh & # Ejecuto la copia del script consolidar.sh en background
-	    PID=$!
-	    echo "$PID";;
+	    bash $HOME/EPNro1/consolidar.sh &;; # Ejecuto la copia del script consolidar.sh en background
         3)
 	    if [[ -f "$HOME/EPNro1/salida/$FILENAME.txt" ]]; then
 	        echo "Listado de alumnos ordenados por numero de padron"
