@@ -2,11 +2,9 @@
 salir="0" 
 
 FILENAME=$1
-export FILENAME
+export FILENAME 
 
-parametro=$1 
-
-if [[ "$parametro" == "-d" ]]; then 
+if [[ "$FILENAME" == "-d" ]]; then 
   echo "Deteniendo el proceso en background y borrando EPNro1..." 
   pkill -f consolidar.sh 
   rm -r $HOME/EPNro1 
@@ -44,7 +42,7 @@ else
         4)
 	    if [[ -f "$HOME/EPNro1/salida/$FILENAME.txt" ]]; then
                 echo "Lista de los alumnos con las 10 mejores notas"
-                sort -t ' ' -k 5 -n -r "$HOME/EPNro1/salida/$FILENAME.txt" | head -10
+                sort -k 5 -n -r "$HOME/EPNro1/salida/$FILENAME.txt" | head -10
             else 
                echo "El archivo no existe en la carpeta salida"
             fi;;
