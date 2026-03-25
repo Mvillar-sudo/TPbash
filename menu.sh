@@ -4,11 +4,9 @@ salir="0"
 FILENAME=$1
 export FILENAME
 
-parametro=$1
-
-if [[ "$parametro" == "-d" ]]; then
+if [[ "$FILENAME" == "-d" ]]; then
   echo "Deteniendo el proceso en background y borrando EPNro1..."
-  pkill -f consolidar.sh
+  pkill -f $HOME/EPNro1/consolidar.sh
   rm -r $HOME/EPNro1
 else
   until [[ "$salir" == "1" ]]; do
@@ -16,7 +14,7 @@ else
     echo "1 - Crear entorno"
     echo "2 - Correr proceso"
     echo "3 - Ordenar listado"
-    echo "4 - lista de las 10 mejores notas"
+    echo "4 - Lista de las 10 mejores notas"
     echo "5 - Buscar nombre por nro. de padron"
     echo "6 - Salir"
 
@@ -28,10 +26,11 @@ else
             mkdir $HOME/EPNro1
             mkdir $HOME/EPNro1/entrada
             mkdir $HOME/EPNro1/salida
-            mkdir $HOME/EPNro1/procesado;;
+            mkdir $HOME/EPNro1/procesado
+	    cp consolidar.sh $HOME/EPNro1/;;
         2)
             echo "Corriendo proceso en background"
-	    bash consolidar.sh & # Ejecuto el script consolidar.sh en background
+	    bash $HOME/EPNro1/consolidar.sh & # Ejecuto la copia del script consolidar.sh en background
 	    PID=$!
 	    echo "$PID";;
         3)
@@ -44,22 +43,22 @@ else
         4)
 	    if [[ -f "$HOME/EPNro1/salida/$FILENAME.txt" ]]; then
                 echo "Lista de los alumnos con las 10 mejores notas"
-                sort -t ' ' -k 5 -n -r "$HOME/EPNro1/salida/$FILENAME.txt" | head -10
+                sort -k 5 -n -r "$HOME/EPNro1/salida/$FILENAME.txt" | head -10
             else
                echo "El archivo no existe en la carpeta salida"
             fi;;
 	5)
 	  if [[ -f "$HOME/EPNro1/salida/$FILENAME.txt" ]]; then
-	    echo "Ingrese nro. de padron ('*' para regresar al menu): "
+	    echo "Ingrese número de padron ('*' para regresar al menu): "
 	    read nro
 	    until [[ "$nro" == "*" ]]; do
 	      chequeo=$(grep $nro $HOME/EPNro1/salida/$FILENAME.txt | wc -l)
 	      if [[ $chequeo -eq 0 ]]; then
-	        echo "No se encontro" 
+	        echo "No se encontro"
 	      else
 	        grep $nro $HOME/EPNro1/salida/$FILENAME.txt
 	      fi
-	      echo "Ingrese número de padrón deseado (o '*' para regresar al menu): "
+	      echo "Ingrese número ('*' para regresar al menu): "
 	      read nro
 	    done
 
