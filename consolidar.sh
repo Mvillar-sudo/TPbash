@@ -10,7 +10,7 @@ while true; do
     for archivo in "$ENTRADA"/*.txt; do
         cat "$archivo" >> "$SALIDA/$FILENAME.txt"
         mv "$archivo" "$PROCESADO/"
-        echo "Procesado: $archivo"
+        echo "Procesado: $archivo" # Avisa que procesó el archivo y lo mandó a la carpeta procesados.
     done
     sleep 5
 done
