@@ -51,11 +51,11 @@ else
 	    echo "Ingrese nro. de padron ('*' para regresar al menu): "
 	    read nro
 	    until [[ "$nro" == "*" ]]; do 
-	      chequeo=$(grep $nro $HOME/EPNro1/salida/$FILENAME.txt | wc -l) 
+	      chequeo=$(grep -w  $nro $HOME/EPNro1/salida/$FILENAME.txt | wc -l) 
 	      if [[ $chequeo -eq 0 ]]; then 
 	        echo "No se encontro" 
 	      else 
-	        grep $nro $HOME/EPNro1/salida/$FILENAME.txt 
+	        grep -w $nro $HOME/EPNro1/salida/$FILENAME.txt 
 	      fi 
 	      echo "ingrese nro ('*' para regresar al menu): " 
 	      read nro
